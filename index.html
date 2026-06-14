@@ -2,12 +2,110 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Mon réseau social</title>
+<title>Mon Réseau Social</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f0f2f5;
+    margin:0;
+}
+
+header{
+    background:#1877f2;
+    color:white;
+    padding:15px;
+    text-align:center;
+}
+
+.container{
+    max-width:600px;
+    margin:20px auto;
+}
+
+.post-box{
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+textarea{
+    width:100%;
+    height:80px;
+    padding:10px;
+}
+
+button{
+    background:#1877f2;
+    color:white;
+    border:none;
+    padding:10px;
+    margin-top:10px;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+.post{
+    background:white;
+    padding:15px;
+    margin-top:10px;
+    border-radius:10px;
+}
+
+.like{
+    color:red;
+    cursor:pointer;
+}
+</style>
 </head>
+
 <body>
 
-<h1>Bienvenue sur mon réseau social 🚀</h1>
-<p>Ceci est mon premier site en ligne.</p>
+<header>
+<h1>Mon Réseau Social 🚀</h1>
+</header>
+
+<div class="container">
+
+<div class="post-box">
+    <textarea id="text" placeholder="Écris quelque chose..."></textarea>
+    <button onclick="addPost()">Publier</button>
+</div>
+
+<div id="posts"></div>
+
+</div>
+
+<script>
+
+function addPost(){
+    let text = document.getElementById("text").value;
+
+    if(text.trim() === ""){
+        alert("Écris quelque chose !");
+        return;
+    }
+
+    let post = document.createElement("div");
+    post.className = "post";
+
+    post.innerHTML = `
+        <p>${text}</p>
+        <span class="like" onclick="like(this)">❤️ 0</span>
+    `;
+
+    document.getElementById("posts").prepend(post);
+    document.getElementById("text").value = "";
+}
+
+function like(el){
+    let count = parseInt(el.innerText.split(" ")[1]);
+    count++;
+    el.innerHTML = "❤️ " + count;
+}
+
+</script>
 
 </body>
 </html>
